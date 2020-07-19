@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <link rel="stylesheet" href="../static/css/nav.css">
+    <link rel="stylesheet" href="../static/css/login.css">
+    <script src="../static/js/jquery-3.1.1.min.js"></script>
+    <script src="../static/js/login.js"></script>
+</head>
+<style>
+    .code{
+        width:100px !important;
+        background-color: #30a1af !important;
+        color: white !important;
+        margin: 2px 0 2px 0 !important;
+    }
+</style>
+<body>
+<!--顶部导航栏-->
+<ul id="navTop">
+    <li><a href="#">首页</a></li>
+<!--    <li><a href="info.html">个人信息</a></li>-->
+<!--    <li><a href="pic.html">相册</a></li>-->
+<!--    <li><a href="login.html">登录</a></li>-->
+
+<!--    <li><img src="../img/un.jpg" alt=""><a href="info.html">SniperIN</a></li>-->
+
+</ul>
+<!--登录框-->
+<div class="login">
+    <div id="login">
+        <div>
+            <h3>LOGIN</h3>
+        </div>
+        <div>
+            <div class="l"><img src="../static/img/head.jpg" alt=""></div>
+            <div class="r"> <input type="text" id="un" name="un" ></div>
+        </div>
+        <div>
+            <div class="l"><img src="../static/img/pwd.jpg" alt=""></div>
+            <div class="r"><input type="password" id="pwd" name="pwd"></div>
+        </div>
+        <div>
+            <div class="l"><button class="code">获取验证码</button></div>
+            <div class="r"><input type="text" id="code" name="code"></div>
+        </div>
+        <span id="error_span"></span>
+        <div>
+            <button class="logo-button" type="button">Sign In</button>
+
+        </div>
+        <div>
+            <a href="">Forget password?</a>
+        </div>
+
+    </div>
+</div>
+
+
+<!--底部导航栏-->
+<div id="navBottom">
+    <div><p>Copyright© ZY</p></div>
+</div>
+</body>
+</html>

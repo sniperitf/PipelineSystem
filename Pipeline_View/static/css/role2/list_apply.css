@@ -1,0 +1,77 @@
+.div_body{
+
+    width: 50%;
+    margin-left:25%;
+    /*background-color: #3da9d9;*/
+    /*height: 600px;*/
+    margin-top: 63px;
+    margin-bottom: 63px;
+
+
+}
+.list{
+    /*height: 70px;*/
+    border: 2px solid #659c9a;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+.list:hover{
+    box-shadow: 3px 3px 3px 3px #9095a3;
+}
+
+.list_ul li:last-child span{
+    color: #338b19;
+    background-color: #c3cad2;
+    border-radius: 5px;
+}
+.list_ul li:nth-child(2) span{
+    color: #1e84d9;
+}
+.list_ul li:nth-child(1) span{
+    color: #8e2da3;
+}
+.list_ul li:nth-child(3) span{
+    color: #c48e29;
+}
+.list_ul li:nth-child(4) span{
+    color: #198763;
+}
+
+.list_ul_unpass li:last-child span{
+    color: #ea0930;
+    background-color: #c3cad2;
+    border-radius: 5px;
+}
+.list_ul_unpass li:nth-child(2) span{
+    color: #1e84d9;
+}
+.list_ul_unpass li:nth-child(1) span{
+    color: #8e2da3;
+}
+.list_ul_unpass li:nth-child(3) span{
+    color: #c48e29;
+}
+.list_ul_unpass li:nth-child(4) span{
+    color: #198763;
+}
+
+.list_ul_unaudit li:last-child span{
+    color: #8d6f1b;
+    background-color: #c3cad2;
+    border-radius: 5px;
+}
+.list_ul_unaudit li:nth-child(2) span{
+    color: #1e84d9;
+}
+.list_ul_unaudit li:nth-child(1) span{
+    color: #8e2da3;
+}
+.list_ul_unaudit li:nth-child(3) span{
+    color: #c48e29;
+}
+.list_ul_unaudit li:nth-child(4) span{
+    color: #198763;
+}
+.id{
+}
+.state{}

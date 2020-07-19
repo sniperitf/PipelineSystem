@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../static/css/nav.css">
+    <link rel="stylesheet" href="../../static/css/role1/apply.css">
+    <link href="../../static/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="http://www.bootcss.com/p/bootstrap-datetimepicker/bootstrap-datetimepicker/css/datetimepicker.css" rel="stylesheet">
+    <link href="../../static/lib/btsp-fileinput/css/fileinput.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../static/lib/btsp-fileinput/css/fileinput-rtl.min.css" rel="stylesheet" type="text/css" />
+
+
+    <script src="../../static/js/jquery-3.1.1.min.js"></script>
+    <script src="../../static/js/role1/apply.js"></script>
+    <script src="../../static/js/parse.js"></script>
+
+    <script type="text/javascript" src="../../static/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="http://www.bootcss.com/p/bootstrap-datetimepicker/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="../../static/lib/btsp-fileinput/js/fileinput.min.js"></script>
+    <script type="text/javascript" src="../../static/lib/btsp-fileinput/js/locales/zh.js"></script>
+
+
+
+
+
+
+
+    <title>ApplyChange</title>
+    <style>
+        .pic_display img{
+            width: 100%;
+        }
+    </style>
+
+</head>
+<body>
+<ul id="navTop">
+    <li><a href="list_apply.html">首页</a></li>
+<!--    <li id="un_info"><img src="../../static/img/head.jpg" alt=""><a href="#">张小宝</a><button id="loginout">注销</button></li>-->
+
+
+</ul>
+<!--中间部分-->
+<div id="div_body">
+    <div class="list">
+        <div class="l_layout">
+           <div>作业地点:</div>
+        </div>
+        <div class="r_layout">
+            <input id="address" type="text">
+        </div>
+    </div>
+
+    <div class="list">
+        <div class="l_layout">
+            <div>作业开始时间:</div>
+        </div>
+        <div class="r_layout">
+            <div class="input-append date form_datetime">
+                <input id="time_up" size="30" type="text" value="" readonly>
+                <span class="add-on"><i class="icon-remove"></i></span>
+                <span class="add-on"><i class="icon-calendar"></i></span>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="list">
+        <div class="l_layout">
+            <div>作业结束时间:</div>
+        </div>
+        <div class="r_layout">
+            <div class="input-append date form_datetime">
+                <input id="time_down" size="30" type="text" value="" readonly>
+                <span class="add-on"><i class="icon-remove"></i></span>
+                <span class="add-on"><i class="icon-calendar"></i></span>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="list">
+        <div class="l_layout">
+            <div>作业类型:</div>
+        </div>
+        <div class="r_layout">
+            <input id="type" size="30" type="text" value="" readonly>
+            <span class="type_span">选择</span>
+            <ul id="type_list">
+            </ul>
+
+        </div>
+    </div>
+
+    <div class="list" style="height: 120px !important;">
+        <div class="l_layout">
+            <div>作业补充说明:</div>
+        </div>
+        <div class="r_layout">
+            <textarea name="" id="remasrks" cols="50" rows="5"></textarea>
+        </div>
+
+    </div>
+
+    <div class="pic_display">
+<!--        <img src="../../static/img/test1.jpg" alt=""><img src="../../static/img/test2.jpg" alt=""><img src="../../static/img/test3.jpg" alt="">-->
+    </div>
+<!--    <div class="pic_display">-->
+<!--    </div>-->
+<!--    <div class="pic_display">-->
+<!--        -->
+<!--    </div>-->
+
+    <div class="list">
+        <div class="l_layout">
+            <div>作业更改:</div>
+        </div>
+        <div class="r_layout">
+            <button class="upload_pic">确认更改</button>
+        </div>
+
+    </div>
+
+    <div class="container-fluid">
+        <form id="form" action="upload/insert" method="post" enctype="multipart/form-data">
+            <div class="row form-group">
+                <label class="col-md-4">图片上传:</label>
+                <div class="col-sm-12">
+                    <input id="input-id" name="file" multiple type="file" data-show-caption="true">
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+</div>
+<!--底部导航栏-->
+<div id="navBottom">
+    <div><p>Copyright© ZY</p></div>
+</div>
+
+
+<script type="text/javascript">
+    var flag = false; //清空图片回显
+    GetUserInfo();
+    $(function () {
+        initFileInput("input-id");
+    })
+
+    function initFileInput(ctrlName) {
+        var control = $('#' + ctrlName);
+        control.fileinput({
+            language: 'zh', //设置语言
+            uploadUrl: "http://resource.natapp1.cc/upload_file", //上传的地址
+            allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀
+            //uploadExtraData:{"id": 1, "fileName":'123.mp3'},
+            uploadAsync: true, //默认异步上传
+            showUpload: true, //是否显示上传按钮
+            showRemove : true, //显示移除按钮
+            showPreview : true, //是否显示预览
+            showCaption: false,//是否显示标题
+            browseClass: "btn btn-primary", //按钮样式
+            dropZoneEnabled: true,//是否显示拖拽区域
+            minImageWidth: 50, //图片的最小宽度
+            minImageHeight: 50,//图片的最小高度
+            maxImageWidth: 1000,//图片的最大宽度
+            maxImageHeight: 1000,//图片的最大高度
+            maxFileSize: 0,//单位为kb，如果为0表示不限制文件大小
+            minFileCount: 0,
+            maxFileCount: 10, //表示允许同时上传的最大文件个数
+            enctype: 'multipart/form-data',
+            validateInitialCount:true,
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+            msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+            window:true,
+
+        }).on('filepreupload', function(event, data, previewId, index) {     //上传中
+            var form = data.form, files = data.files, extra = data.extra,
+                response = data.response, reader = data.reader;
+            console.log('文件正在上传');
+        }).on("fileuploaded", function (event, data, previewId, index) {    //一个文件上传成功
+            var htmlStr = ''
+            if(flag==false){
+                $(".pic_display").html(htmlStr);
+                flag = true;
+            }
+            htmlStr +=  '<img class="fileUrls" src="'+data.response.data+'" alt="">';
+            $(".pic_display").append(htmlStr);
+            console.log('文件上传成功！'+data.id);
+
+        }).on('fileerror', function(event, data, msg) {  //一个文件上传失败
+            console.log('文件上传失败！'+data.id);
+
+
+        })
+    }
+
+
+
+</script>
+<script>
+    GetUserInfo();
+    UserLogout();
+    // sessionStorage读取  JSON
+    var apply = JSON.parse(sessionStorage.getItem("apply"));
+    var user = JSON.parse(sessionStorage.getItem("user_info"));
+    var uid = user.user.uid;
+    var reqId = apply.reqId;
+    // console.log(uid)
+
+    $("#address").attr("value",apply.position);
+    $("#time_up").attr("value",apply.startTime);
+    $("#time_down").attr("value",apply.endTime);
+    $("#type").attr("value",GetType(apply.typeId));
+    // $("#remasrks").attr("value",apply.memo);
+    $("#remasrks").val(apply.memo);
+    $("#Status").html(GetStatus(apply.status));
+    $("#Reject_Reason").val(apply.rejectReason);
+
+    var fileUrls = (apply.fileUrls) ;
+    var htmlStr=''
+    for(var i in fileUrls){
+        htmlStr +=  '<img src="'+fileUrls[i]+'" alt="">';
+    }
+    $(".pic_display").html(htmlStr);
+
+    $(".upload_pic").click(function () {
+        var fileUrls = [];
+        $(".pic_display").on('each','.fileUrls',function () {
+            fileUrls.push($(this).attr("src"))
+        });
+        $.ajax({
+            url:'http://resource.natapp1.cc/role1/updateApplyByReqId',
+            type: "post",
+            data:{
+                reqId:reqId,
+                position:$("#address").val(),
+                typeId:ParseType($('#type').val()),
+                startTime:$("#time_up").val(),
+                endTime:$("#time_down").val(),
+                memo:$('#remasrks').val(),
+                fileUrls:fileUrls,
+                uId:uid,
+                status:apply.status
+    },
+            success:function (msg) {
+                if(msg.code==0){
+                    alert("作业申请修改成功");
+                }
+
+                window.location.href = "list_apply.html";
+            }
+        })
+    })
+
+</script>
+
+
+
+
+</body>
+</html>

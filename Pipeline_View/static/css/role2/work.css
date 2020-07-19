@@ -1,0 +1,56 @@
+.work_body{
+    margin-left: 15%;
+    margin-top: 60px;
+    width: 70%;
+    background-color: #e8ecee;
+    /*opacity: 0.8;*/
+}
+.work_title{
+    text-align: center;
+    height: 45px;
+    /*background-color: #1e84d9;*/
+    font-size: 35px;
+    border: 1px solid #0e9292;
+}
+.work_head{
+    text-align: center;
+    height: 30px;
+    /*background-color: #1ed99e;*/
+    font-size:20px;
+    border: 1px solid #0e9292;
+}
+
+.work_list{
+    height:100px ;
+    /*background-color: yellow;*/
+    border: 1px solid #0e9292;
+}
+.work_list_info{
+    float: left;
+    width: 25%;
+    margin-top: 8px;
+}
+
+.work_mark{
+    height: 35px;
+    text-align: center;
+    font-size: 28px;
+    border: 1px solid #0e9292;
+}
+.work_mark_info{
+    float: left;
+    width: 25%;
+    /*border: 1px solid black;*/
+}
+.work_img{
+    text-align: center;
+}
+
+.work_but{
+    height:35px;
+    margin-top:2%;
+    margin-left: 1%;
+    margin-bottom: 2%;
+    background-color: #4e8dbf;
+    border-radius: 10px;
+}

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../static/css/nav.css">
+    <link rel="stylesheet" href="../../static/css/role2/list_apply.css">
+
+    <script src="../../static/js/jquery-3.1.1.min.js"></script>
+    <script src="../../static/js/parse.js"></script>
+<!--    <script src="../../static/js/role2/list_apply.js"></script>-->
+    <title>ListApply</title>
+</head>
+<body>
+<!--头部部分-->
+<ul id="navTop">
+    <li><a href="#">首页</a></li>
+    <li><a id='unaudit' href="#">未审核</a></li>
+    <li><a id="pass" href="#">已通过</a></li>
+    <li><a id='unpass' href="#">未通过</a></li>
+    <li><a  href="apply.html">添加申请</a></li>
+<!--    <li id="un_info"><img src="../../static/img/head.jpg" alt=""><a href="#">张小宝</a><button id="loginout">注销</button></li>-->
+
+
+</ul>
+
+<!--中间部分-->
+<div class="div_body">
+    <div class="list">
+        <ul class="list_ul">
+            <li>地点：<span>四川省南充市嘉陵区李渡中学</span></li>
+            <li>作业类型：<span>用火作业</span></li>
+            <li>作业开始时间：<span>2020-18-49 12:00</span></li>
+            <li class="reqId">作业ID：<span>1</span></li>
+            <li class="status">作业状态：<span>未通过</span></li>
+        </ul>
+    </div>
+
+    <div class="list">
+        <ul class="list_ul_unpass">
+            <li>地点：<span>四川省南充市嘉陵区李渡中学</span></li>
+            <li>作业类型：<span>用火作业</span></li>
+            <li>作业开始时间：<span>2020-18-49 12:00</span></li>
+            <li>作业ID：<span>1</span></li>
+            <li>作业状态：<span>未通过</span></li>
+        </ul>
+    </div>
+
+    <div class="list">
+        <ul class="list_ul_unaudit">
+            <li>地点：<span>四川省南充市嘉陵区李渡中学</span></li>
+            <li>作业类型：<span>用火作业</span></li>
+            <li>作业开始时间：<span>2020-18-49 12:00</span></li>
+            <li>作业ID：<span>1</span></li>
+            <li>作业状态：<span>未审核</span></li>
+        </ul>
+    </div>
+
+</div>
+<br>
+<br>
+<br>
+<br>
+<!--底部导航栏-->
+<div id="navBottom">
+    <div><p>Copyright© ZY</p></div>
+</div>
+
+<script>
+    // $(document).ready(function () {
+        GetUserInfo();
+        var user_info = JSON.parse(sessionStorage.getItem("user_info"));
+        uId = user_info.user.uid;
+        $.ajax({
+            url:"http://resource.natapp1.cc/role1/findApplyByUid",
+            type:'post',
+            data:{
+                uId:uId
+            },
+            success:function (msg) {
+                var htmlStr = '';
+                var applies = msg.data;
+                for(var i in applies){
+                    if(applies[i].status==1){
+                        htmlStr += '<div class="list"><ul class="list_ul">';
+                    }else if(applies[i].status==2){
+                        htmlStr += '<div class="list"><ul class="list_ul_unaudit">';
+                    }else if(applies[i].status==0){
+                        htmlStr += '<div class="list"><ul class="list_ul_unpass">';
+                    }else{
+                        htmlStr += '<div class="list"><ul class="list_ul_unpass">'
+                    }
+                    htmlStr += '<li>地点：<span>'+applies[i].position+'</span></li>';
+                    htmlStr += '<li>作业类型：<span>'+GetType(applies[i].typeId)+'</span></li>';
+                    htmlStr += '<li>作业开始时间：<span>'+applies[i].startTime+'</span></li>';
+                    htmlStr += '<li class="reqId">作业ID：<span>'+applies[i].reqId+'</span></li>';
+                    htmlStr += '<li class="status">作业状态：<span>'+GetStatus(applies[i].status)+'</span></li></ul></div>';
+                }
+                $(".div_body").html(htmlStr);
+            }
+        })
+
+
+        // 显示安保分析已通过作业申请列表
+        $("#pass").click(function () {
+            $.ajax({
+                url:"http://resource.natapp1.cc/role1/findApplyByStatus",
+                data:{
+                    status:3
+                },
+                type:"post",
+                success:function (msg) {
+                    var htmlStr = '';
+                    var applies = msg.data;
+                    for(var i in applies){
+                        htmlStr += '<div class="list"><ul class="list_ul">';
+                        htmlStr += '<li>地点：<span>'+applies[i].position+'</span></li>';
+                        htmlStr += '<li>作业类型：<span>'+GetType(applies[i].typeId)+'</span></li>';
+                        htmlStr += '<li>作业开始时间：<span>'+applies[i].startTime+'</span></li>';
+                        htmlStr += '<li class="reqId">作业ID：<span>'+applies[i].reqId+'</span></li>';
+                        htmlStr += '<li class="status">作业状态：<span>'+GetStatus(applies[i].status)+'</span></li></ul></div>';
+                    }
+                    $(".div_body").html(htmlStr);
+                }
+            })
+        });
+
+        // 显示安全分析没通过作业申请列表
+        $("#unpass").click(function () {
+            $.ajax({
+                url:"http://resource.natapp1.cc/role1/findApplyByStatus",
+                type:"post",
+                data:{
+                    status: 0
+                },
+                success:function (msg) {
+                    var htmlStr = '';
+                    var applies = msg.data;
+                    for(var i in applies){
+                        htmlStr += '<div class="list"><ul class="list_ul">';
+                        htmlStr += '<li>地点：<span>'+applies[i].position+'</span></li>';
+                        htmlStr += '<li>作业类型：<span>'+GetType(applies[i].typeId)+'</span></li>';
+                        htmlStr += '<li>作业开始时间：<span>'+applies[i].startTime+'</span></li>';
+                        htmlStr += '<li class="reqId">作业ID：<span>'+applies[i].reqId+'</span></li>';
+                        htmlStr += '<li class="status">作业状态：<span>'+GetStatus(applies[i].status)+'</span></li></ul></div>';
+                    }
+                    $(".div_body").html(htmlStr);
+
+                }
+            })
+        });
+
+        // 显示没审核作业申请列表
+        $("#unaudit").click(function () {
+            $.ajax({
+                url:"http://resource.natapp1.cc/role1/findApplyByStatus",
+                type:"post",
+                data:{
+                    status: 2
+                },
+                success:function (msg) {
+                    var htmlStr = '';
+                    var applies = msg.data;
+                    for(var i in applies){
+                        htmlStr += '<div class="list"><ul class="list_ul">';
+                        htmlStr += '<li>地点：<span>'+applies[i].position+'</span></li>';
+                        htmlStr += '<li>作业类型：<span>'+GetType(applies[i].typeId)+'</span></li>';
+                        htmlStr += '<li>作业开始时间：<span>'+applies[i].startTime+'</span></li>';
+                        htmlStr += '<li class="reqId">作业ID：<span>'+applies[i].reqId+'</span></li>';
+                        htmlStr += '<li class="status">作业状态：<span>'+GetStatus(applies[i].status)+'</span></li></ul></div>';
+                    }
+                    $(".div_body").html(htmlStr);
+
+                }
+            })
+        });
+
+        // 动态元素绑定事件
+        $(".div_body").on('click',".list",function () {
+            // this元素下继续寻找子元素
+            var reqId = $(this).find(".reqId").find("span").text();
+            var status = $(this).find(".status").find("span").text();
+            var apply_info = {
+               reqId:reqId,
+               status:status
+            };
+            //sessionStorage 存储
+            sessionStorage.setItem("apply_info",JSON.stringify(apply_info));
+            window.location.href = "../../templates/role1/apply_info.html";
+        })
+
+    UserLogout();
+    // })
+</script>
+</body>
+</html>

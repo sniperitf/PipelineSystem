@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../static/css/role2/work.css">
+    <link rel="stylesheet" href="../../static/css/nav.css">
+
+    <link href="../../static/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../static/lib/btsp-fileinput/css/fileinput.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../static/lib/btsp-fileinput/css/fileinput-rtl.min.css" rel="stylesheet" type="text/css" />
+
+
+    <script src="../../static/js/jquery-3.1.1.min.js"></script>
+    <script src="../../static/js/parse.js"></script>
+<!--    <script src="../../static/js/role2/work.js"></script>-->
+
+    <script type="text/javascript" src="../../static/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../static/lib/btsp-fileinput/js/fileinput.min.js"></script>
+    <script type="text/javascript" src="../../static/lib/btsp-fileinput/js/locales/zh.js"></script>
+    <title>work</title>
+</head>
+<style>
+    #insert{
+        margin-bottom: 2px;
+    }
+    .unstandard{
+        display: none;
+        font-size: 18px;
+        color: white;
+        font-family: KaiTi;
+    }
+    .pass{
+        display: none;
+        font-size: 18px;
+        color: white;
+        font-family: KaiTi;
+    }
+    .file_upload_p{
+        display: none;
+    }
+    .work_but_dis{
+        height:35px;
+        margin-top:2%;
+        margin-left: 1%;
+        margin-bottom: 2%;
+        background-color: #4e8dbf;
+        border-radius: 10px;
+    }
+    .work_img certificate img{
+        width: 100%;
+    }
+</style>
+<body>
+<!--顶部导航栏-->
+<ul id="navTop">
+    <li><a href="list_apply.html">首页</a></li>
+<!--    <li id="un_info"><img src="../../static/img/head.jpg" alt=""><a href="#">张小宝</a><button id="loginout">注销</button></li>-->
+
+
+</ul>
+<div class="work_body" id="insert">
+    <div class="work_title">用火作业</div>
+    <div class="work_mark">
+        <div class="work_mark_info">危害ID</div>
+        <div class="work_mark_info">补充措施</div>
+        <div class="work_mark_info">是否落实</div>
+        <div class="work_mark_info">确认人</div>
+    </div>
+
+<!--    <div class="work_list">-->
+<!--        <div class="work_list_info"><textarea class="harmId"  cols="30" rows="4" disabled="disabled">1</textarea></div>-->
+<!--        <div class="work_list_info"><textarea class="addMemo"  cols="30" rows="4" disabled="disabled">值护人员仔细核对人员特殊作业证件，并扫描留存</textarea></div>-->
+<!--        <div class="work_list_info"><textarea class="isDone"  cols="30" rows="4"  placeholder="1 is yes， 0 is no"></textarea></div>-->
+<!--        <div class="work_list_info"><textarea class="userConfirm"  cols="30" rows="4" ></textarea></div>-->
+<!--    </div>-->
+
+<!--    <div class="work_list">-->
+<!--        <div class="work_list_info"><textarea class="harmId"  cols="30" rows="4" disabled="disabled">1</textarea></div>-->
+<!--        <div class="work_list_info"><textarea class="addMemo"  cols="30" rows="4" disabled="disabled">值护人员仔细核对人员特殊作业证件，并扫描留存</textarea></div>-->
+<!--        <div class="work_list_info"><textarea class="isDone"  cols="30" rows="4"  placeholder="1 is yes， 0 is no"></textarea></div>-->
+<!--        <div class="work_list_info"><textarea class="userConfirm"  cols="30" rows="4" ></textarea></div>-->
+<!--    </div>-->
+<!--    <div class="work_list">-->
+<!--        <div class="work_list_info"><textarea class="harmId"  cols="30" rows="4" disabled="disabled">1</textarea></div>-->
+<!--        <div class="work_list_info"><textarea class="addMemo"  cols="30" rows="4" disabled="disabled">值护人员仔细核对人员特殊作业证件，并扫描留存</textarea></div>-->
+<!--        <div class="work_list_info"><textarea class="isDone"  cols="30" rows="4"  placeholder="1 is yes， 0 is no"></textarea></div>-->
+<!--        <div class="work_list_info"><textarea class="userConfirm"  cols="30" rows="4" ></textarea></div>-->
+<!--    </div>-->
+
+<!--    <div class="work_list">-->
+<!--        <div class="work_list_info"><textarea class="harmId"  cols="30" rows="4" disabled="disabled">1</textarea></div>-->
+<!--        <div class="work_list_info"><textarea class="addMemo"  cols="30" rows="4" disabled="disabled">值护人员仔细核对人员特殊作业证件，并扫描留存</textarea></div>-->
+<!--        <div class="work_list_info"><textarea class="isDone"  cols="30" rows="4"  placeholder="1 is yes， 0 is no"></textarea></div>-->
+<!--        <div class="work_list_info"><textarea class="userConfirm"  cols="30" rows="4" ></textarea></div>-->
+<!--    </div>-->
+<!--    <div class="work_list">-->
+<!--        <div class="work_list_info"><textarea class="harmId"  cols="30" rows="4" disabled="disabled">1</textarea></div>-->
+<!--        <div class="work_list_info"><textarea class="addMemo"  cols="30" rows="4" disabled="disabled">值护人员仔细核对人员特殊作业证件，并扫描留存</textarea></div>-->
+<!--        <div class="work_list_info"><textarea class="isDone"  cols="30" rows="4"  placeholder="1 is yes， 0 is no"></textarea></div>-->
+<!--        <div class="work_list_info"><textarea class="userConfirm"  cols="30" rows="4" ></textarea></div>-->
+<!--    </div>-->
+
+<!--    <div class="work_list">-->
+<!--        <div class="work_list_info"><textarea class="harmId"  cols="30" rows="4" disabled="disabled">1</textarea></div>-->
+<!--        <div class="work_list_info"><textarea class="addMemo"  cols="30" rows="4" disabled="disabled">值护人员仔细核对人员特殊作业证件，并扫描留存</textarea></div>-->
+<!--        <div class="work_list_info"><textarea class="isDone"  cols="30" rows="4"  placeholder="1 is yes， 0 is no"></textarea></div>-->
+<!--        <div class="work_list_info"><textarea class="userConfirm"  cols="30" rows="4" ></textarea></div>-->
+<!--    </div>-->
+
+
+
+</div>
+<div class="work_body">
+    <div class="work_head">作业许可证</div>
+
+    <div class="work_img certificate">
+<!--        <img src="../../static/img/test1.jpg" alt="">-->
+    </div>
+
+    <div class="work_head">作业票</div>
+    <div class="work_img ticket">
+<!--        <img src="../../static/img/test1.jpg" alt="">-->
+    </div>
+
+
+    <div class="file_upload_p">
+
+
+        <div class="work_list">
+            <div class="work_list_info"><div class="unstandard"><button class="work_but_dis">审核不通过</button></div></div>
+            <div class="work_list_info">审核不通过理由：</div>
+            <div class="work_list_info"><textarea class="rejectReason" name="3"  cols="30" rows="4"></textarea></div>
+            <div class="work_list_info"><div class="pass"><button class="work_but">审核通过</button></div></div>
+        </div>
+
+        <div class="work_head">作业票上传</div>
+        <div class="container-fluid">
+            <form id="form" action="upload/insert" method="post" enctype="multipart/form-data">
+                <div class="row form-group">
+                    <label class="col-md-4">图片上传:</label>
+                    <div class="col-sm-12">
+                        <input id="input-id" name="file" multiple type="file" data-show-caption="true">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+</div>
+<!--底部导航栏-->
+<div id="navBottom">
+    <div><p>Copyright© ZY</p></div>
+</div>
+
+<script type="text/javascript">
+    GetUserInfo();
+    UserLogout();
+
+    $(function () {
+        initFileInput("input-id");
+    })
+
+    function initFileInput(ctrlName) {
+        var control = $('#' + ctrlName);
+        control.fileinput({
+            language: 'zh', //设置语言
+            uploadUrl: "http://resource.natapp1.cc/upload_file", //上传的地址
+            allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀
+            //uploadExtraData:{"id": 1, "fileName":'123.mp3'},
+            uploadAsync: true, //默认异步上传
+            showUpload: true, //是否显示上传按钮
+            showRemove : true, //显示移除按钮
+            showPreview : true, //是否显示预览
+            showCaption: false,//是否显示标题
+            browseClass: "btn btn-primary", //按钮样式
+            dropZoneEnabled: true,//是否显示拖拽区域
+            minImageWidth: 50, //图片的最小宽度
+            minImageHeight: 50,//图片的最小高度
+            maxImageWidth: 1000,//图片的最大宽度
+            maxImageHeight: 1000,//图片的最大高度
+            maxFileSize: 0,//单位为kb，如果为0表示不限制文件大小
+            minFileCount: 0,
+            maxFileCount: 10, //表示允许同时上传的最大文件个数
+            enctype: 'multipart/form-data',
+            validateInitialCount:true,
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+            msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+            window:true,
+
+        }).on('filepreupload', function(event, data, previewId, index) {     //上传中
+            var form = data.form, files = data.files, extra = data.extra,
+                response = data.response, reader = data.reader;
+            console.log('文件正在上传');
+        }).on("fileuploaded", function (event, data, previewId, index) {    //一个文件上传成功
+            console.log('文件上传成功！'+data.id);
+            var htmlStr = ''
+            htmlStr +=  '<img class="ticket" src="'+data.response.data+'" alt="">';
+            $(".work_img ticket").append(htmlStr);
+            console.log('文件上传成功！'+data.id);
+
+        }).on('fileerror', function(event, data, msg) {  //一个文件上传失败
+            console.log('文件上传失败！'+data.id);
+
+
+        })
+    }
+
+    var apply = JSON.parse(sessionStorage.getItem("apply"));
+    // console.log(apply)
+    var status = apply.status;
+
+
+    var checkList = apply.checkList;
+    for (var i in checkList){
+        var htmlStr = '';
+        htmlStr += '<div class="work_list"><div class="work_list_info"><textarea class="harmId"  cols="30" rows="4" disabled="disabled">'+checkList[i].harmId+'</textarea></div>';
+        htmlStr += '<div class="work_list_info"><textarea class="addMemo"  cols="30" rows="4" disabled="disabled">'+checkList[i].addMemo+'</textarea></div>';
+        htmlStr += '<div class="work_list_info"><textarea class="isdone"  cols="30" rows="4" >'+checkList[i].isdone+'</textarea></div>';
+        htmlStr += '<div class="work_list_info"><textarea class="userConfirm"  cols="30" rows="4">'+checkList[i].userConfirm+'</textarea></div></div>';
+        $("#insert").append(htmlStr);
+    }
+
+    var user_info = JSON.parse(sessionStorage.getItem("user_info"));
+    uId = user_info.user.uid;
+    //状态为已开许可证
+    if(status==3){
+        $('.unstandard').css("display","block");
+        $(".file_upload_p").css("display","block");
+        $(".pass").css("display","block");
+    }
+    $("work_img certificate").html('<img src="'+apply.licenseUrl+'" alt="">');
+
+
+
+    $(".work_but_dis").click(function () {
+        var rejectReason = $(".rejectReason").text();
+        var checkList = apply.checkList;
+        var isdones = []
+        $(".isdone").each(function () {
+            isdones.push($(this).text())
+        })
+        var userConfirms = []
+        $(".userConfirms").each(function () {
+            userConfirms.push($(this).text())
+        })
+
+        for (var i in checkList){
+           checkList[i].isdone = isdones[i];
+            checkList[i].userConfirm = userConfirms[i];
+        }
+
+        $.ajax({
+            url:'http://resource.natapp1.cc/role3/saveTicketUnPass',
+            type:'post',
+            data:{
+                checkList:JSON.stringify(checkList),
+                uId:uId,
+                rejectReason:rejectReason
+            },
+            success:function (msg) {
+                if(msg.code==0){
+                    alert('数据上传成功');
+                }
+                window.location.href='list_apply.html'
+            }
+        })
+
+    })
+
+    $(".work_but").click(function () {
+        // var rejectReason = $(".rejectReason").text();
+        var ticketUrl = $(".ticket").attr("src")
+        var rejectReason = $(".rejectReason").text();
+        var checkList = apply.checkList;
+        var isdones = []
+        $(".isdone").each(function () {
+            isdones.push($(this).val())
+        })
+        var userConfirms = []
+        $(".userConfirm").each(function () {
+            userConfirms.push($(this).val())
+        })
+
+        for (var i in checkList){
+            checkList[i].isdone = isdones[i];
+            checkList[i].userConfirm = userConfirms[i];
+        }
+
+        $.ajax({
+            url:'http://resource.natapp1.cc/role3/saveTicketUnPass',
+            type:'post',
+            data:{
+                checkList:JSON.stringify(checkList),
+                uId:uId,
+                ticketUrl:ticketUrl
+            },
+            success:function (msg) {
+                if(msg.code==0){
+                    alert('数据上传成功');
+                }
+                window.location.href='list_apply.html'
+            }
+        })
+
+    })
+
+
+
+
+</script>
+
+</body>
+</html>

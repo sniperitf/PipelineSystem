@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../static/css/nav.css">
+    <link rel="stylesheet" href="../../static/css/role1/apply.css">
+
+
+    <script src="../../static/js/jquery-3.1.1.min.js"></script>
+    <script src="../../static/js/parse.js"></script>
+<!--    <script src="../../static/js/role2/apply_info.js"></script>-->
+    <title>ApplyInfo</title>
+    <style>
+        .pic_display img{
+            width: 100%;
+        }
+    </style>
+    <style>
+        .state{
+           margin-top: 15px;
+            font-family: KaiTi;
+            font-size: 20px;
+        }
+        .state span{
+            background-color: #93bbbb;
+            border-radius: 5px;
+        }
+        #change{
+            text-align: center;
+            display: none;
+
+        }
+        #change button{
+            margin-top: 15px;
+            background-color: #00a2d4;
+            font-family: KaiTi;
+            color: white;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<ul id="navTop">
+    <li><a href="list_apply.html">首页</a></li>
+<!--    <li id="un_info"><img src="../../static/img/head.jpg" alt=""><a href="#">张小宝</a><button id="loginout">注销</button></li>-->
+
+
+</ul>
+<!--中间部分-->
+<div id="div_body">
+    <div class="list">
+        <div class="l_layout">
+            <div>作业地点:</div>
+        </div>
+        <div class="r_layout">
+            <input id="address" type="text">
+        </div>
+    </div>
+
+    <div class="list">
+        <div class="l_layout">
+            <div>作业开始时间:</div>
+        </div>
+        <div class="r_layout">
+            <div class="input-append date form_datetime">
+                <input id="time_up" size="30" type="text" value="" readonly>
+                <span class="add-on"><i class="icon-remove"></i></span>
+                <span class="add-on"><i class="icon-calendar"></i></span>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="list">
+        <div class="l_layout">
+            <div>作业结束时间:</div>
+        </div>
+        <div class="r_layout">
+            <div class="input-append date form_datetime">
+                <input id="time_down" size="30" type="text" value="" readonly>
+                <span class="add-on"><i class="icon-remove"></i></span>
+                <span class="add-on"><i class="icon-calendar"></i></span>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="list">
+        <div class="l_layout">
+            <div>作业类型:</div>
+        </div>
+        <div class="r_layout">
+            <input id="type" size="30" type="text" value="" readonly>
+            <span class="type_span">选择</span>
+            <ul id="type_list">
+            </ul>
+
+        </div>
+    </div>
+
+    <div class="list" style="height: 120px !important;">
+        <div class="l_layout">
+            <div>作业补充说明:</div>
+        </div>
+        <div class="r_layout">
+            <textarea name="" id="remasrks" cols="50" rows="5"></textarea>
+        </div>
+
+    </div>
+
+    <div class="pic_display">
+<!--        <img src="../../static/img/test1.jpg" alt=""><img src="../../static/img/test2.jpg" alt=""><img src="../../static/img/test3.jpg" alt="">-->
+    </div>
+
+    <div class="list">
+        <div class="l_layout">
+            <div>安全分析状态:</div>
+        </div>
+        <div class="r_layout state">
+            <span id="Status">未通过</span>
+        </div>
+
+    </div>
+    <div class="list">
+        <div class="l_layout">
+            <div>未通过理由：</div>
+        </div>
+        <div class="r_layout">
+            <textarea name="reason" id="Reject_Reason" cols="50" rows="3"></textarea>
+        </div>
+
+    </div>
+
+    <div class="list" id="change">
+        <div class="l_layout">
+            <button id="delete">撤销申请</button>
+        </div>
+        <div class="r_layout">
+            <button id="change_apply">修改申请</button>
+        </div>
+
+
+
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+</div>
+
+
+<!--底部导航栏-->
+<div id="navBottom">
+    <div><p>Copyright© ZY</p></div>
+</div>
+<script>
+    $(document).ready(function () {
+        GetUserInfo();
+        UserLogout();
+        // sessionStorage读取  JSON
+        var apply_info = JSON.parse(sessionStorage.getItem("apply_info"));
+        var status = apply_info.status;
+        if(status=='安全分析已通过' || status=="安全分析未审核"){
+            $("#change").css("display","block");
+        }
+        var reqId = apply_info.reqId;
+        $.ajax({
+            url:"http://resource.natapp1.cc/role1/findApplyByReqId",
+            type:"post",
+            data:{
+                reqId:reqId
+            },
+            success:function (msg) {
+                sessionStorage.setItem("apply",JSON.stringify(msg.data));
+                var apply = msg.data;
+                $("#address").attr("value",apply.position);
+                $("#time_up").attr("value",apply.startTime);
+                $("#time_down").attr("value",apply.endTime);
+                $("#type").attr("value",GetType(apply.typeId));
+                // $("#remasrks").attr("value",apply.memo);
+                $("#remasrks").val(apply.memo);
+                $("#Status").html(GetStatus(apply.status));
+                $("#Reject_Reason").val(apply.rejectReason);
+
+                var fileUrls = apply.fileUrls ;
+                var htmlStr=''
+                for(var i in fileUrls){
+                    htmlStr +=  '<img src="'+fileUrls[i]+'" alt="">';
+                }
+                $(".pic_display").html(htmlStr);
+            }
+        })
+
+        $("#delete").click(function () {
+            $.ajax({
+                url:"http://resource.natapp1.cc/role1/deleteApply",
+                type: "post",
+                data:{
+                    reqId:reqId
+                },
+                success:function (msg) {
+                    if(msg.code==0){
+                        alert("撤销申请成功");
+                    }
+                    window.location.href = "apply_list.html";
+                }
+            })
+        })
+
+        $("#change_apply").click(function () {
+            window.location.href = "../../templates/role1/apply_change.html";
+        })
+
+    })
+</script>
+
+</body>
+</html>

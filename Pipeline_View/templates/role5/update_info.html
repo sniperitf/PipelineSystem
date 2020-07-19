@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../static/css/nav.css">
+    <script src="../../static/js/jquery-3.1.1.min.js"></script>
+    <script src="../../static/js/parse.js"></script>
+    <title>Title</title>
+</head>
+<style>
+    .update_body{
+        margin:63px 25% 63px 25%;
+    }
+    .list{
+        height: 60px;
+        border-radius: 3px;
+        border: 1px solid #aec1d7;
+        font-size: 18px;
+        margin: 2px 0 2px 0;
+    }
+    .list_l{
+        float: left;
+        width: 40%;
+        text-align: center;
+        margin-top: 15px;
+    }
+    .list_r{
+        float: left;
+        width: 60%;
+        text-align: center;
+        margin-top: 15px;
+
+    }
+    .list_r input{
+        height: 18px;
+        border-radius: 5px;
+    }
+    #update_butt{
+        border-radius: 3px;
+        height: 30px;
+        background-color: #00b7ee;
+        font-size: 18px;
+        font-family: KaiTi;
+        color: white;
+    }
+    #role{
+        width: 40%;
+        height: 25px;
+        border-radius: 3px;
+        border: 2px solid #39392e;
+    }
+</style>
+<body>
+<!--头部部分-->
+<ul id="navTop">
+    <li><a href="user_list.html">首页</a></li>
+<!--    <li id="un_info"><img src="../static/img/head.jpg" alt=""><a href="#">张小宝</a><button id="loginout">注销</button></li>-->
+
+
+</ul>
+<div class="update_body">
+    <div class="list">
+        <div class="list_l">
+            用户姓名：
+        </div>
+        <div class="list_r">
+            <input type="text" id="username">
+        </div>
+
+    </div>
+    <div class="list">
+        <div class="list_l">
+           邮箱：
+        </div>
+        <div class="list_r">
+            <input type="text" id="useremail">
+        </div>
+
+    </div>
+    <div class="list">
+        <div class="list_l">
+          密码：
+        </div>
+        <div class="list_r">
+            <input type="password" id="userpwd">
+        </div>
+
+    </div>
+    <div class="list">
+        <div class="list_l">
+            联系电话：
+        </div>
+        <div class="list_r">
+            <input type="text" id="usertel">
+        </div>
+
+    </div>
+<!--    <div class="list">-->
+<!--        <div class="list_l">-->
+<!--           单位编号：-->
+<!--        </div>-->
+<!--        <div class="list_r">-->
+<!--            <input type="text" id="unitid">-->
+<!--        </div>-->
+
+<!--    </div>-->
+    <div class="list">
+        <div class="list_l">
+            用户角色：
+        </div>
+        <div class="list_r">
+            <select name="" id="role">
+                <option value="" selected="selected">1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+            </select>
+        </div>
+
+    </div>
+    <div class="list">
+        <div class="list_l">
+            <button id="update_butt">确认修改</button>
+        </div>
+        <div class="list_r">
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--底部导航栏-->
+<div id="navBottom">
+    <div><p>Copyright© ZY</p></div>
+</div>
+<script>
+    $(document).ready(function () {
+        GetUserInfo();
+        UserLogout();
+        // sessionStorage读取  JSON
+        var user_id = JSON.parse(sessionStorage.getItem("user_id"));
+        var userid = user_id.id;
+        $.ajax({
+            url:'http://resource.natapp1.cc/user/user',
+            type:'post',
+            data:{
+                uId:userid
+            },
+            success:function (data) {
+                var user_info = data.data;
+                $("#username").val(user_info.uname);
+                $("#useremail").val(user_info.uemail);
+                $("#userpwd").val(user_info.upassword);
+                $("#usertel").val(user_info.utel);
+                // $("#unitid").val(user_info.unitid);
+                $("#role").find("option[value="+user_info.unitId+"]").attr("selected",true)
+            }
+        })
+
+
+
+
+        $("#update_butt").click(function () {
+            var username =   $("#username").val();
+            var useremail = $("#useremail").val();
+            var userpwd =  $("#userpwd").val();
+            var usertel =  $("#usertel").val();
+            // var unitid =  $("#unitid").val();
+            var role = $("#role").val();
+            $.ajax({
+                url:'http://resource.natapp1.cc/user/update',
+                type:"post",
+                data:{
+                    uId:userid,
+                    uPassword:userpwd,
+                    uName:username,
+                    uEmail:useremail,
+                    uTel:usertel,
+                    // unitid:unitid,
+                   unitId:role
+                },
+                success:function (data) {
+                    if(data.code==0){
+                        alert("更新成功");
+                        window.location.href = "user_list.html";
+                    }else{
+                        alert("更新失败");
+                    }
+
+                }
+            });
+        });
+
+
+
+    })
+</script>
+
+</body>
+</html>

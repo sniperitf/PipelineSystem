@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../static/css/nav.css">
+
+    <link href="../../static/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../static/lib/btsp-fileinput/css/fileinput.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../static/lib/btsp-fileinput/css/fileinput-rtl.min.css" rel="stylesheet" type="text/css" />
+
+    <script src="../../static/js/jquery-3.1.1.min.js"></script>
+    <script src="../../static/js/parse.js"></script>
+
+
+    <script type="text/javascript" src="../../static/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../static/lib/btsp-fileinput/js/fileinput.min.js"></script>
+    <script type="text/javascript" src="../../static/lib/btsp-fileinput/js/locales/zh.js"></script>
+    <title>progress</title>
+</head>
+<style>
+
+    .progress_body{
+        margin: 63px 25% 63px 25%;
+        font-family: KaiTi;
+        font-size: 18px;
+
+    }
+    .list{
+        height: 60px;
+        border: 1px solid #909084;
+        text-align: center;
+        margin:2px 0 2px 0;
+    }
+    .list_l{
+        float: left;
+        width: 40%;
+        margin-top: 15px;
+    }
+    .list_r{
+        float: left;
+        width: 60%;
+        margin-top: 15px;
+    }
+    #progress_result{
+        height: 25px;
+    }
+    .list_img{
+        text-align: center;
+        border: 1px solid #909084;
+    }
+    .file_upload{
+        border: 1px solid #909084;
+    }
+    .save_pro{
+        background-color: #00a2d4;
+        border-radius: 10px;
+        border-width: 1px;
+        border: 1px solid white;
+    }
+    .list_img img{
+        width: 100%;
+    }
+</style>
+<body>
+<!--顶部导航栏-->
+<ul id="navTop">
+    <li><a href="list_apply.html">首页</a></li>
+    <li id="un_info"><img src="../../static/img/head.jpg" alt=""><a href="#">张小宝</a><button id="loginout">注销</button></li>
+
+
+</ul>
+<!--中间部分-->
+<div class="progress_body">
+    <div class="list">
+        <div class="list_l">
+            作业结果：
+        </div>
+        <div class="list_r">
+            <select name="" id="progress_result">
+                <option value="" selected="selected">作业结束</option>
+                <option value="" >作业非正常完成</option>
+            </select>
+        </div>
+    </div>
+    <div class="list">
+        <div class="list_l">
+            作业非正常完成说明：
+        </div>
+        <div class="list_r">
+            <textarea name="" id="accDesc" cols="30" rows="1"></textarea>
+        </div>
+    </div>
+    <div class="list_img">
+<!--        <img class="fileUrl"  src="../../static/img/test1.jpg" alt="">-->
+    </div>
+
+</div>
+
+    <div class="file_upload">
+        <div class="container-fluid">
+            <form id="form" action="upload/insert" method="post" enctype="multipart/form-data">
+                <div class="row form-group">
+                    <label class="col-md-4">图片上传:</label>
+                    <div class="col-sm-12">
+                        <input id="input-id" name="file" multiple type="file" data-show-caption="true">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="list">
+        <div class="list_l">
+            确认进度更改：
+        </div>
+        <div class="list_r">
+            <button class="save_pro">保存</button>
+        </div>
+    </div>
+
+</div>
+
+<!--底部导航栏-->
+<div id="navBottom">
+    <div><p>Copyright© ZY</p></div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        GetUserInfo();
+        UserLogout();
+        $(function () {
+            initFileInput("input-id");
+        })
+
+        function initFileInput(ctrlName) {
+            var control = $('#' + ctrlName);
+            control.fileinput({
+                language: 'zh', //设置语言
+                uploadUrl: "upload/insert", //上传的地址
+                allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀
+                //uploadExtraData:{"id": 1, "fileName":'123.mp3'},
+                uploadAsync: true, //默认异步上传
+                showUpload: true, //是否显示上传按钮
+                showRemove : true, //显示移除按钮
+                showPreview : true, //是否显示预览
+                showCaption: false,//是否显示标题
+                browseClass: "btn btn-primary", //按钮样式
+                dropZoneEnabled: true,//是否显示拖拽区域
+                minImageWidth: 50, //图片的最小宽度
+                minImageHeight: 50,//图片的最小高度
+                maxImageWidth: 1000,//图片的最大宽度
+                maxImageHeight: 1000,//图片的最大高度
+                maxFileSize: 0,//单位为kb，如果为0表示不限制文件大小
+                minFileCount: 0,
+                maxFileCount: 10, //表示允许同时上传的最大文件个数
+                enctype: 'multipart/form-data',
+                validateInitialCount:true,
+                previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+                msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+                window:true,
+
+            }).on('filepreupload', function(event, data, previewId, index) {     //上传中
+                var form = data.form, files = data.files, extra = data.extra,
+                    response = data.response, reader = data.reader;
+                console.log('文件正在上传');
+            }).on("fileuploaded", function (event, data, previewId, index) {    //一个文件上传成功
+                htmlStr='';
+                htmlStr = '  <img class="fileUrl"  src="'+data.url+'" alt="">';
+                console.log('文件上传成功！'+data.id);
+
+            }).on('fileerror', function(event, data, msg) {  //一个文件上传失败
+                console.log('文件上传失败！'+data.id);
+
+
+            })
+        }
+
+
+        $(".save_pro").click(function () {
+            var process_result = $("#progress_result").val();
+            var isFinished = '';
+            if(process_result=='作业结束'){
+                isFinished = 1;
+            }else {
+                isFinished = 0;
+            }
+
+            var apply_info = JSON.parse(sessionStorage.getItem("apply_info"));
+            var reqId = apply_info.reqId;
+            var user_info = JSON.parse(sessionStorage.getItem("user_info"));
+            var uId = user_info.user.uid;
+
+            var fileUrl = []
+            $(".fileUrl").each(function () {
+                fileUrl.push($(this).attr("src"));
+            })
+            var accDesc = $("#accDesc").text();
+            if(isFinished==1){
+                $.ajax({
+                    url:'http://resource.natapp1.cc/role3/over',
+                    type:'post',
+                    data:{
+                        reqId:reqId,
+                        isFinished:isFinished,
+                        userMonitor:uId,
+                        fileUrl:JSON.stringify(fileUrl)
+                    },
+                    success:function (msg) {
+                        if(msg.code==0){
+                            alert("数据保存成功")
+                        }else{
+                            alert("数据保存失败")
+                        }
+                        window.location.href="list_apply.html";
+                    }
+                })
+
+            }else{
+                $.ajax({
+                    url:'http://resource.natapp1.cc/role3/disOver',
+                    type:'post',
+                    data:{
+                        reqId:reqId,
+                        isFinished:isFinished,
+                        userMonitor:uId,
+                        accDesc:accDesc
+                    },
+                    success:function (msg) {
+                        if(msg.code==0){
+                            alert("数据保存成功")
+                        }else{
+                            alert("数据保存失败")
+                        }
+                        window.location.href="list_apply.html";
+                    }
+                })
+            }
+        })
+
+
+
+        
+    })
+
+</script>
+</body>
+
+</html>

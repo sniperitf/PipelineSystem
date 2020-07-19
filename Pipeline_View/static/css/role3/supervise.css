@@ -1,0 +1,33 @@
+.supervise_body{
+    margin:60px 25% 60px 25%;
+    width: 50%;
+    background-color: #3da9d9;
+}
+.supervise_list{
+    /*height: 60px;*/
+    text-align: center;
+}
+
+.supervise_list_font{
+    height: 60px;
+    margin-top: 15px;
+}
+.supervise_list_l{
+    float: left;
+    width: 40%;
+    margin-top: 15px;
+}
+.supervise_list_r{
+    float: left;
+    width: 60%;
+    margin-top: 15px;
+}
+
+.supervise_but{
+    height:35px;
+    margin-top:2%;
+    margin-left: 2%;
+    margin-bottom: 2%;
+    background-color: #4e8dbf;
+    border-radius: 10px;
+}

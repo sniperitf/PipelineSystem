@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../static/css/nav.css">
+    <script src="../../static/js/jquery-3.1.1.min.js"></script>
+    <script src="../../static/js/parse.js"></script>
+    <title>Title</title>
+</head>
+<style>
+    .update_body{
+        margin:63px 25% 63px 25%;
+    }
+    .list{
+        height: 60px;
+        border-radius: 3px;
+        border: 1px solid #aec1d7;
+        font-size: 18px;
+        margin: 2px 0 2px 0;
+    }
+    .list_l{
+        float: left;
+        width: 40%;
+        text-align: center;
+        margin-top: 15px;
+    }
+    .list_r{
+        float: left;
+        width: 60%;
+        text-align: center;
+        margin-top: 15px;
+
+    }
+    .list_r input{
+        height: 18px;
+        border-radius: 5px;
+    }
+    #adduser_butt{
+        border-radius: 3px;
+        height: 30px;
+        background-color: #00b7ee;
+        font-size: 18px;
+        font-family: KaiTi;
+        color: white;
+    }
+    #role{
+        width: 40%;
+        height: 25px;
+        border-radius: 3px;
+        border: 2px solid #39392e;
+    }
+</style>
+<body>
+<!--头部部分-->
+<ul id="navTop">
+    <li><a href="user_list.html">首页</a></li>
+<!--    <li id="un_info"><img src="../static/img/head.jpg" alt=""><a href="#">张小宝</a><button id="loginout">注销</button></li>-->
+
+
+</ul>
+<div class="update_body">
+    <div class="list">
+        <div class="list_l">
+            用户姓名：
+        </div>
+        <div class="list_r">
+            <input type="text" id="username">
+        </div>
+
+    </div>
+    <div class="list">
+        <div class="list_l">
+            邮箱：
+        </div>
+        <div class="list_r">
+            <input type="text" id="useremail">
+        </div>
+
+    </div>
+    <div class="list">
+        <div class="list_l">
+            密码：
+        </div>
+        <div class="list_r">
+            <input type="password" id="userpwd">
+        </div>
+
+    </div>
+    <div class="list">
+        <div class="list_l">
+            联系电话：
+        </div>
+        <div class="list_r">
+            <input type="text" id="usertel">
+        </div>
+
+    </div>
+    <div class="list">
+        <div class="list_l">
+            单位编号：
+        </div>
+        <div class="list_r">
+            <input type="text" id="unitid">
+        </div>
+
+    </div>
+    <div class="list">
+        <div class="list_l">
+            用户角色：
+        </div>
+        <div class="list_r">
+            <select name="" id="role">
+                <option value="" selected="selected">1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+            </select>
+        </div>
+
+    </div>
+    <div class="list">
+        <div class="list_l">
+            <button id="adduser_butt">确认添加</button>
+        </div>
+        <div class="list_r">
+
+        </div>
+
+    </div>
+
+</div>
+
+<!--底部导航栏-->
+<div id="navBottom">
+    <div><p>Copyright© ZY</p></div>
+</div>
+<script>
+    $(document).ready(function () {
+        GetUserInfo();
+        $("#adduser_butt").click(function () {
+            var username =   $("#usernam").val();
+            var useremail = $("#useremail").val();
+            var userpwd =  $("#userpwd").val();
+            var usertel =  $("#usertel").val();
+            // var unitid =  $("#unitid").val();
+            var role = $("#role").val();
+            $.ajax({
+                url:'http://resource.natapp1.cc/user/register',
+                type:"post",
+                data:{
+                    uId:useremail,
+                    uPassword:userpwd,
+                    uName:username,
+                    uTel:usertel,
+                    // unitid:unitid,
+                    unitId:role
+                },
+                success:function (msg) {
+                   if(msg.code===0){
+                       alert("用户添加成功");
+                   }else{
+                       alert("用户添加失败");
+                   }
+                }
+            });
+        });
+
+    })
+</script>
+
+</body>
+</html>
